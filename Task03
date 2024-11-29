@@ -1,0 +1,76 @@
+import java.util.Scanner;
+
+public class ATMInterface {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Initial account balance
+        double balance = 5000.0;
+        boolean exit = false;
+
+        System.out.println("Welcome to the ATM Interface!");
+
+        while (!exit) {
+            // Display menu options
+            System.out.println("\nPlease select an option:");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit Money");
+            System.out.println("3. Withdraw Money");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    // Check balance
+                    System.out.println("\nYour current balance is: ₹" + balance);
+                    break;
+
+                case 2:
+                    // Deposit money
+                    System.out.print("\nEnter the amount to deposit: ₹");
+                    double depositAmount = scanner.nextDouble();
+
+                    if (depositAmount > 0) {
+                        balance += depositAmount;
+                        System.out.println("₹" + depositAmount + " has been successfully deposited.");
+                        System.out.println("Updated balance: ₹" + balance);
+                    } else {
+                        System.out.println("Invalid amount. Please try again.");
+                    }
+                    break;
+
+                case 3:
+                    // Withdraw money
+                    System.out.print("\nEnter the amount to withdraw: ₹");
+                    double withdrawAmount = scanner.nextDouble();
+
+                    if (withdrawAmount > 0 && withdrawAmount <= balance) {
+                        balance -= withdrawAmount;
+                        System.out.println("₹" + withdrawAmount + " has been successfully withdrawn.");
+                        System.out.println("Updated balance: ₹" + balance);
+                    } else if (withdrawAmount > balance) {
+                        System.out.println("Insufficient funds! Your current balance is ₹" + balance);
+                    } else {
+                        System.out.println("Invalid amount. Please try again.");
+                    }
+                    break;
+
+                case 4:
+                    // Exit
+                    System.out.println("\nThank you for using the ATM. Have a great day!");
+                    exit = true;
+                    break;
+
+                default:
+                    // Invalid choice
+                    System.out.println("\nInvalid choice. Please try again.");
+                    break;
+            }
+        }
+
+        scanner.close();
+    }
+}
